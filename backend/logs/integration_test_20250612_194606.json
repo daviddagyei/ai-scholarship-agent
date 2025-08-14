@@ -1,0 +1,71 @@
+{
+  "success": true,
+  "scholarships": [
+    {
+      "id": "test-scholarship-001",
+      "title": "STEM Excellence Scholarship",
+      "description": "A comprehensive scholarship program for outstanding students in Science, Technology, Engineering, and Mathematics fields. This scholarship supports undergraduate and graduate students who demonstrate exceptional academic achievement and leadership potential in STEM disciplines.",
+      "amount": "$5,000",
+      "deadline": "2025-08-15",
+      "eligibility": "Undergraduate or graduate students, 3.5 GPA minimum, STEM majors, US citizens or permanent residents",
+      "requirements": "Application form, Academic transcript, Two letters of recommendation, Personal statement (500 words), Research portfolio",
+      "applicationUrl": "https://stemfoundation.org/scholarships/excellence/apply",
+      "provider": "National STEM Education Foundation",
+      "category": "STEM",
+      "status": "active",
+      "createdDate": "2025-06-12T19:46:06.733947",
+      "modifiedDate": "2025-06-12T19:46:06.733954",
+      "createdBy": "scholarship-agent@integration-test",
+      "lastModifiedBy": "scholarship-agent@integration-test"
+    },
+    {
+      "id": "test-scholarship-002",
+      "title": "Arts and Humanities Leadership Award",
+      "description": "Supporting creative minds and future leaders in arts, literature, philosophy, and cultural studies. This award recognizes students who combine artistic excellence with community engagement and leadership skills.",
+      "amount": "$3,000",
+      "deadline": "2025-07-20",
+      "eligibility": "Undergraduate students, 3.0 GPA minimum, Arts or Humanities majors, demonstrated community service",
+      "requirements": "Application form, Portfolio of work, Essay on leadership in arts, Transcript, One letter of recommendation",
+      "applicationUrl": "https://artshumanities.edu/awards/leadership/apply",
+      "provider": "Arts and Humanities Coalition",
+      "category": "Arts & Humanities",
+      "status": "active",
+      "createdDate": "2025-06-12T19:46:06.733982",
+      "modifiedDate": "2025-06-12T19:46:06.733986",
+      "createdBy": "scholarship-agent@integration-test",
+      "lastModifiedBy": "scholarship-agent@integration-test"
+    },
+    {
+      "id": "test-scholarship-003",
+      "title": "Diversity in Technology Scholarship",
+      "description": "Promoting diversity and inclusion in technology fields by supporting underrepresented students pursuing computer science, software engineering, and related technical disciplines.",
+      "amount": "$4,500",
+      "deadline": "2025-09-30",
+      "eligibility": "Underrepresented minorities in tech, Computer Science or related majors, All academic levels welcome",
+      "requirements": "Application form, Diversity statement, Technical project showcase, Academic records, Mentor recommendation",
+      "applicationUrl": "https://techfuture.org/diversity-scholarship",
+      "provider": "Tech Future Initiative",
+      "category": "Diversity & Inclusion",
+      "status": "active",
+      "createdDate": "2025-06-12T19:46:06.734000",
+      "modifiedDate": "2025-06-12T19:46:06.734003",
+      "createdBy": "scholarship-agent@integration-test",
+      "lastModifiedBy": "scholarship-agent@integration-test"
+    }
+  ],
+  "scholarships_discovered": 3,
+  "scholarships_saved": 3,
+  "scholarships_skipped": 0,
+  "search_criteria": "STEM and diversity scholarships for college students 2025",
+  "timestamp": "2025-06-12T19:46:06.733260",
+  "duration_seconds": 45.7,
+  "sources_count": 3,
+  "pipeline_type": "JSON-first enhanced pipeline (integration test)",
+  "quality_report": {
+    "high_quality": 3,
+    "medium_quality": 0,
+    "low_quality": 0
+  },
+  "test_type": "integration_test",
+  "test_timestamp": "2025-06-12T19:46:06.737173"
+}
