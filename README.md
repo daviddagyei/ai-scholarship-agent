@@ -1,108 +1,225 @@
-# Gemini Fullstack LangGraph Quickstart
+# AI Scholarship Discovery Agent
 
-This project demonstrates a fullstack application using a React frontend and a LangGraph-powered backend agent. The agent is designed to perform comprehensive research on a user's query by dynamically generating search terms, querying the web using Google Search, reflecting on the results to identify knowledge gaps, and iteratively refining its search until it can provide a well-supported answer with citations. This application serves as an example of building research-augmented conversational AI using LangGraph and Google's Gemini models.
+An intelligent, AI-powered scholarship discovery platform that combines a LangGraph-based agent with a modern React frontend to automatically find, extract, and organize scholarship opportunities from across the web.
 
-![Gemini Fullstack LangGraph](./app.png)
+##  Overview
 
-## Features
+This project features an advanced AI agent built with LangGraph that intelligently searches the web for scholarship opportunities, extracts structured data, and provides a clean interface for students to discover relevant scholarships. The agent uses Google's Gemini 2.0 Flash model to understand scholarship requirements, categorize opportunities, and ensure data quality.
 
-- 💬 Fullstack application with a React frontend and LangGraph backend.
-- 🧠 Powered by a LangGraph agent for advanced research and conversational AI.
-- 🔍 Dynamic search query generation using Google Gemini models.
-- 🌐 Integrated web research via Google Search API.
-- 🤔 Reflective reasoning to identify knowledge gaps and refine searches.
-- 📄 Generates answers with citations from gathered sources.
-- 🔄 Hot-reloading for both frontend and backend development during development.
+##  Architecture
 
-## Project Structure
+- **AI Agent**: LangGraph-powered scholarship discovery agent using Gemini 2.0 Flash
+- **Backend**: FastAPI application with agent orchestration and Google Sheets integration
+- **Frontend**: React + TypeScript web application with real-time agent communication
+- **Data Pipeline**: JSON-first structured extraction with automatic validation and enhancement
+- **Integration**: Direct Google Sheets API integration with audit logging
 
-The project is divided into two main directories:
+##  Features
 
--   `frontend/`: Contains the React application built with Vite.
--   `backend/`: Contains the LangGraph/FastAPI application, including the research agent logic.
+### AI Agent Capabilities
+- **Intelligent Query Generation**: Automatically generates optimized search queries based on user criteria
+- **Web Research**: Uses Google Search API with Gemini 2.0 Flash to find scholarship opportunities
+- **Structured Data Extraction**: Converts unstructured web content into standardized JSON format
+- **Smart Enhancement**: AI-powered categorization and missing field inference
+- **Quality Validation**: Multi-stage filtering to ensure only high-quality scholarships are saved
+- **Deduplication**: Prevents duplicate scholarship entries across discovery sessions
+- **URL Validation**: Fallback search for missing application URLs
 
-## Getting Started: Development and Local Testing
+### Web Application
+- **Real-time Agent Interaction**: Stream live updates from the AI agent during discovery
+- **Activity Timeline**: Visual representation of agent's research process
+- **Chat Interface**: Natural language interaction with the scholarship agent
+- **Responsive Design**: Works seamlessly on desktop, tablet, and mobile devices
+- **Modern UI**: Clean, shadcn/ui-based interface with TypeScript safety
 
-Follow these steps to get the application running locally for development and testing.
+### Data Management
+- **JSON-First Pipeline**: Structured data extraction with 15-field schema matching Google Sheets
+- **Google Sheets Integration**: Direct API integration for data storage and retrieval
+- **Automatic Metadata**: Auto-generated IDs, timestamps, and audit trails
+- **Data Quality Metrics**: Comprehensive validation and quality reporting
+- **Audit Logging**: Complete tracking of agent activities and data changes
 
-**1. Prerequisites:**
+##  Tech Stack
 
--   Node.js and npm (or yarn/pnpm)
--   Python 3.8+
--   **`GEMINI_API_KEY`**: The backend agent requires a Google Gemini API key.
-    1.  Navigate to the `backend/` directory.
-    2.  Create a file named `.env` by copying the `backend/.env.example` file.
-    3.  Open the `.env` file and add your Gemini API key: `GEMINI_API_KEY="YOUR_ACTUAL_API_KEY"`
+### AI Agent & Backend
+- **LangGraph** for agent orchestration and workflow management
+- **Google Gemini 2.0 Flash** for natural language understanding and reasoning
+- **FastAPI** for high-performance API server
+- **Google Search API** for web research capabilities
+- **Pydantic** for data validation and schema enforcement
+- **Google Sheets API** for direct spreadsheet integration
 
-**2. Install Dependencies:**
+### Frontend
+- **React 18** + TypeScript for the user interface
+- **shadcn/ui** + Tailwind CSS for modern UI components
+- **Vite** for fast development and building
+- **LangChain SDK** for real-time agent communication
+- **Streaming API** for live updates during agent execution
 
-**Backend:**
+### Data & Infrastructure
+- **JSON-first Pipeline** with structured data extraction
+- **Google Sheets** as primary data store
+- **UUID Generation** for unique scholarship identification
+- **ISO Timestamp Management** for audit trails
+- **Environment-based Configuration** for flexible deployment
 
-```bash
-cd backend
-pip install .
-```
+##  Prerequisites
 
-**Frontend:**
+- **Node.js 18+** and npm (for frontend)
+- **Python 3.9+** (for AI agent backend)
+- **Google API Key** (for Gemini 2.0 Flash model)
+- **Google Search API** credentials (for web research)
+- **Google Sheets API** credentials (for data storage)
+- Optional: **Docker** and **Docker Compose** for containerized deployment
 
-```bash
-cd frontend
-npm install
-```
+##  Quick Start
 
-**3. Run Development Servers:**
+### Option 1: Docker Compose (Recommended)
 
-**Backend & Frontend:**
-
-```bash
-make dev
-```
-This will run the backend and frontend development servers.    Open your browser and navigate to the frontend development server URL (e.g., `http://localhost:5173/app`).
-
-_Alternatively, you can run the backend and frontend development servers separately. For the backend, open a terminal in the `backend/` directory and run `langgraph dev`. The backend API will be available at `http://127.0.0.1:2024`. It will also open a browser window to the LangGraph UI. For the frontend, open a terminal in the `frontend/` directory and run `npm run dev`. The frontend will be available at `http://localhost:5173`._
-
-## How the Backend Agent Works (High-Level)
-
-The core of the backend is a LangGraph agent defined in `backend/src/agent/graph.py`. It follows these steps:
-
-![Agent Flow](./agent.png)
-
-1.  **Generate Initial Queries:** Based on your input, it generates a set of initial search queries using a Gemini model.
-2.  **Web Research:** For each query, it uses the Gemini model with the Google Search API to find relevant web pages.
-3.  **Reflection & Knowledge Gap Analysis:** The agent analyzes the search results to determine if the information is sufficient or if there are knowledge gaps. It uses a Gemini model for this reflection process.
-4.  **Iterative Refinement:** If gaps are found or the information is insufficient, it generates follow-up queries and repeats the web research and reflection steps (up to a configured maximum number of loops).
-5.  **Finalize Answer:** Once the research is deemed sufficient, the agent synthesizes the gathered information into a coherent answer, including citations from the web sources, using a Gemini model.
-
-## Deployment
-
-In production, the backend server serves the optimized static frontend build. LangGraph requires a Redis instance and a Postgres database. Redis is used as a pub-sub broker to enable streaming real time output from background runs. Postgres is used to store assistants, threads, runs, persist thread state and long term memory, and to manage the state of the background task queue with 'exactly once' semantics. For more details on how to deploy the backend server, take a look at the [LangGraph Documentation](https://langchain-ai.github.io/langgraph/concepts/deployment_options/). Below is an example of how to build a Docker image that includes the optimized frontend build and the backend server and run it via `docker-compose`.
-
-_Note: For the docker-compose.yml example you need a LangSmith API key, you can get one from [LangSmith](https://smith.langchain.com/settings)._
-
-_Note: If you are not running the docker-compose.yml example or exposing the backend server to the public internet, you update the `apiUrl` in the `frontend/src/App.tsx` file your host. Currently the `apiUrl` is set to `http://localhost:8123` for docker-compose or `http://localhost:2024` for development._
-
-**1. Build the Docker Image:**
-
-   Run the following command from the **project root directory**:
+1. **Clone and configure**:
    ```bash
-   docker build -t gemini-fullstack-langgraph -f Dockerfile .
-   ```
-**2. Run the Production Server:**
-
-   ```bash
-   GEMINI_API_KEY=<your_gemini_api_key> LANGSMITH_API_KEY=<your_langsmith_api_key> docker-compose up
+   git clone <repository-url>
+   cd ai-scholarship-agent
+   cp .env.example .env
+   # Edit .env with your API keys
    ```
 
-Open your browser and navigate to `http://localhost:8123/app/` to see the application. The API will be available at `http://localhost:8123`.
+2. **Start with Docker Compose**:
+   ```bash
+   docker-compose up -d
+   ```
 
-## Technologies Used
+3. **Access the application**:
+   - Frontend: `http://localhost:3000`
+   - Backend API: `http://localhost:8123`
 
-- [React](https://reactjs.org/) (with [Vite](https://vitejs.dev/)) - For the frontend user interface.
-- [Tailwind CSS](https://tailwindcss.com/) - For styling.
-- [Shadcn UI](https://ui.shadcn.com/) - For components.
-- [LangGraph](https://github.com/langchain-ai/langgraph) - For building the backend research agent.
-- [Google Gemini](https://ai.google.dev/models/gemini) - LLM for query generation, reflection, and answer synthesis.
+### Option 2: Manual Setup
 
-## License
+1. **Backend Setup**:
+   ```bash
+   cd backend
+   pip install -r requirements.txt
+   # Configure environment variables
+   export GEMINI_API_KEY="your-gemini-api-key"
+   export GOOGLE_SEARCH_API_KEY="your-search-api-key"
+   # Start the agent server
+   python -m langgraph up
+   ```
 
-This project is licensed under the Apache License 2.0. See the [LICENSE](LICENSE) file for details. 
+2. **Frontend Setup**:
+   ```bash
+   cd frontend
+   npm install
+   npm run dev
+   ```
+
+3. **Open your browser** to `http://localhost:5173`
+
+##  How the AI Agent Works
+
+### Discovery Process
+
+1. **Query Understanding**: The agent analyzes your scholarship search criteria
+2. **Search Strategy**: Generates multiple optimized search queries for comprehensive coverage
+3. **Web Research**: Executes searches using Google Search API and analyzes results
+4. **Content Extraction**: Uses Gemini 2.0 Flash to extract structured scholarship data
+5. **Enhancement**: Fills missing fields, categorizes scholarships, and validates URLs
+6. **Quality Control**: Filters out low-quality entries and removes duplicates
+7. **Storage**: Saves validated scholarships directly to Google Sheets with full audit trails
+
+### Data Schema
+
+Each scholarship follows this standardized format:
+```json
+{
+  "id": "uuid",
+  "title": "Scholarship Name",
+  "description": "Detailed description",
+  "amount": "$5,000",
+  "deadline": "2025-07-15",
+  "eligibility": "Requirements list",
+  "requirements": "Application requirements",
+  "application_url": "https://...",
+  "provider": "Organization name",
+  "category": "STEM/Arts/General/etc",
+  "status": "Active",
+  "created_date": "ISO timestamp",
+  "modified_date": "ISO timestamp",
+  "created_by": "AI Agent",
+  "last_modified_by": "AI Agent"
+}
+```
+
+## 🔧 Configuration
+
+### Environment Variables
+
+Create a `.env` file in the backend directory:
+
+```bash
+# AI Model Configuration
+GEMINI_API_KEY=your_gemini_api_key_here
+GOOGLE_SEARCH_API_KEY=your_google_search_api_key
+GOOGLE_SEARCH_ENGINE_ID=your_custom_search_engine_id
+
+# Google Sheets Integration
+GOOGLE_SHEETS_CREDENTIALS_PATH=path/to/service-account.json
+SCHOLARSHIP_SPREADSHEET_ID=your_spreadsheet_id
+
+# Agent Configuration
+AGENT_AUTH_TOKEN=optional_auth_token
+LANGCHAIN_TRACING_V2=true
+LANGCHAIN_API_KEY=your_langsmith_api_key
+```
+
+### Google APIs Setup
+
+1. **Google AI Studio**: Get your Gemini API key from [aistudio.google.com](https://aistudio.google.com)
+2. **Google Search API**: Enable Custom Search API in Google Cloud Console
+3. **Google Sheets API**: Create a service account and download credentials JSON
+
+##  Usage Examples
+
+### Interactive Chat
+```
+User: "Find STEM scholarships for undergraduate students"
+Agent: Generates search queries → Researches web → Extracts data → Saves to sheets
+```
+
+### Specific Criteria
+```
+User: "Find scholarships for computer science majors with deadlines after July 2025"
+Agent: Tailored search → Quality filtering → Structured extraction
+```
+
+### Bulk Discovery
+```
+User: "Discover all available scholarships for minority students in engineering"
+Agent: Comprehensive search → Multi-source research → Deduplication → Bulk save
+```
+
+##  Monitoring & Analytics
+
+- **Real-time Progress**: Watch the agent work through the discovery pipeline
+- **Quality Metrics**: Track data quality scores and validation results
+- **Performance Stats**: Monitor search success rates and processing times
+- **Audit Logs**: Complete history of agent activities and data changes
+
+##  Contributing
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+##  License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+##  Acknowledgments
+
+- **LangGraph** for the agent framework
+- **Google Gemini** for AI capabilities
+- **shadcn/ui** for the beautiful UI components
+- **The open-source community** for the amazing tools and libraries
