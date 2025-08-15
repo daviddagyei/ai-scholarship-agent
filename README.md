@@ -2,7 +2,8 @@
 
 An intelligent, AI-powered scholarship discovery platform that combines a LangGraph-based agent with a modern React frontend to automatically find, extract, and organize scholarship opportunities from across the web.
 
-🌐 **Live Demo**: [https://ppscholarshiphub.netlify.app/](https://ppscholarshiphub.netlify.app/)
+🌐 **Live Demo**: [https://ppscholarshiphub.netlify.app/](https://ppscholarshiphub.netlify.app/)  
+*The webapp streams live scholarship results directly from the Google Sheet where the AI agent discovers and stores scholarship data.*
 
 ##  Overview
 
@@ -28,6 +29,7 @@ This project features an advanced AI agent built with LangGraph that intelligent
 - **URL Validation**: Fallback search for missing application URLs
 
 ### Web Application
+- **Live Data Streaming**: Real-time access to scholarships from Google Sheets populated by the AI agent
 - **Real-time Agent Interaction**: Stream live updates from the AI agent during discovery
 - **Activity Timeline**: Visual representation of agent's research process
 - **Chat Interface**: Natural language interaction with the scholarship agent
