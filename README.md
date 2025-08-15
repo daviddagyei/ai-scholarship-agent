@@ -2,6 +2,8 @@
 
 An intelligent, AI-powered scholarship discovery platform that combines a LangGraph-based agent with a modern React frontend to automatically find, extract, and organize scholarship opportunities from across the web.
 
+🌐 **Live Demo**: [https://ppscholarshiphub.netlify.app/](https://ppscholarshiphub.netlify.app/)
+
 ##  Overview
 
 This project features an advanced AI agent built with LangGraph that intelligently searches the web for scholarship opportunities, extracts structured data, and provides a clean interface for students to discover relevant scholarships. The agent uses Google's Gemini 2.0 Flash model to understand scholarship requirements, categorize opportunities, and ensure data quality.
